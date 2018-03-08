@@ -1,0 +1,33 @@
+<configuration debug="true">
+ 
+    <springProfile name="dev">
+        <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+            <file>logback-dev.log</file>
+            <encoder>
+                <pattern>%date %level [%thread] %logger{10} [%file : %line] %msg%n</pattern>
+            </encoder>
+        </appender>
+    </springProfile>
+    <springProfile name="prod">
+        <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+            <file>logback-prod.log</file>
+            <encoder>
+                <pattern>%date %level [%thread] %logger{10} [%file : %line] %msg%n</pattern>
+            </encoder>
+        </appender>
+    </springProfile>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+    </appender>
+ 
+    <logger name="com" additivity="true">
+        <appender-ref ref="FILE" />
+    </logger>
+ 
+    <root level="info">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>
